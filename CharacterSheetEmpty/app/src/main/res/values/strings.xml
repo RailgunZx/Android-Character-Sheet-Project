@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Homebrew Genie</string>
+    <string name="tab_text_1">Characters</string>
+    <string name="tab_text_2">Items</string>
+    <string name="tab_text_3">Monsters</string>
+    <string name="tab_text_4">Spells</string>
+    <string name="new_fab">New Creation</string>
+    <string name="character_name">Character Name</string>
+    <string name="character_image">Character Image</string>
+    <string name="item_name">Item Name</string>
+    <string name="item_image">Item Image</string>
+    <string name="stat1">Strength</string>
+    <string name="stat2">Constitution</string>
+    <string name="stat3">Arcana</string>
+    <string name="stat4">Health</string>
+    <string name="stat5">Equip Load</string>
+    <string-array name="stat_array">
+        <item>Strength</item>
+        <item>Constitution</item>
+        <item>Arcana</item>
+        <item>Health</item>
+        <item>Equip Load</item>
+    </string-array>
+</resources>
