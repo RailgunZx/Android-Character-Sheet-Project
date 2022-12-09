@@ -15,7 +15,6 @@ import com.example.charactersheetempty.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private val characterList: MutableList<String> = mutableListOf()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,19 +34,5 @@ class MainActivity : AppCompatActivity() {
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }*/
-
-        characterList.add("wowed");
-        val testy = Character("testing", 2)
-        val coolRing = Item(1, "Cool Ring", "Very cool ring.")
-        val stats = AddStats(500, 500, 500, 500, 500)
-        coolRing.AddPassiveComponent(stats)
-        coolRing.AddEquippedComponent(stats)
-        coolRing.AddEquippedComponent(AddWeight(13.37f))
-        testy.AddItem(coolRing)
-        Log.d("MainActivity", testy.toString())
-        testy.EquipItem(0)
-        Log.d("MainActivity", testy.toString())
-        testy.RemoveItem(coolRing)
-        Log.d("MainActivity", testy.toString())
     }
 }

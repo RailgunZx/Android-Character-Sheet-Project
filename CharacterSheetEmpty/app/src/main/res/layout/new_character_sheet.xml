@@ -292,6 +292,12 @@
                 android:text="EquipLoad: 0"
                 android:textSize="24sp" />
 
+            <Button
+                android:id="@+id/backBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="SAVE" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -315,13 +321,8 @@
                 android:id="@+id/imageButton3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:contentDescription="item image"
                 app:srcCompat="@android:drawable/ic_input_add" />
-
-            <Button
-                android:id="@+id/backBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Return Home" />
 
         </LinearLayout>
 

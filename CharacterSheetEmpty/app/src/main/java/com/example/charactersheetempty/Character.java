@@ -4,6 +4,8 @@ import java.util.List;
 
 public class Character {
     public String playerName;
+    public String playerRace;
+    public String playerClass;
 
     public int playerLevel;
     public int currentHealth;
@@ -25,9 +27,11 @@ public class Character {
     private List<Item> items = new ArrayList<Item>();
 
 
-    public Character(String name, int level){
+    public Character(String name, String race, String _class, int level){
         playerName = name;
         playerLevel = level;
+        playerRace = race;
+        playerClass = _class;
         LoadCharacterStats();
         currentHealth = maxHealthActual;
         currentSpellSlots = maxSpellSlotsActual;

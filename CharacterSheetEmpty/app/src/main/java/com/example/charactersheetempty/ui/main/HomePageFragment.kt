@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.charactersheetempty.NewCharacterActivity
-import com.example.charactersheetempty.NewItemActivity
+import com.example.charactersheetempty.*
 import com.example.charactersheetempty.databinding.FragmentMainBinding
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -26,6 +28,12 @@ class HomePageFragment : Fragment() {
     private lateinit var pageViewModel: PageViewModel
     private var _binding: FragmentMainBinding? = null
 
+    private val characterList: MutableList<Character> = mutableListOf()
+
+    //private val characterListViewModel: CharacterViewModel by viewModels {
+        //CharacterViewModel.CharacterViewModelFactory((application as CharacterApplication).repository)
+    //}
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -36,6 +44,21 @@ class HomePageFragment : Fragment() {
             setIndex(arguments?.getInt(ARG_SECTION_NUMBER) ?: 1)
         }
 
+        // Testing making a character using the code imported
+        val testy = Character("Darth Vader", "Human", "Jedi", 2)
+        val coolRing = Item(1, "Cool Ring", "Very cool ring.")
+        val stats = AddStats(500, 500, 500, 500, 500)
+        coolRing.AddPassiveComponent(stats)
+        coolRing.AddEquippedComponent(stats)
+        coolRing.AddEquippedComponent(AddWeight(13.37f))
+        testy.AddItem(coolRing)
+        //Log.d("MainActivity", testy.toString())
+        testy.EquipItem(0)
+        //Log.d("MainActivity", testy.toString())
+        val secondTest = Character("Artoria Pendragon", "Human", "Warrior", 15)
+        secondTest.AddItem(coolRing)
+        characterList.add(testy)
+        characterList.add(secondTest)
     }
 
     override fun onCreateView(
@@ -72,14 +95,14 @@ class HomePageFragment : Fragment() {
     fun newCharacterSheet(){
         Log.d("Pages", "CharacterSheet")
         val intent = Intent(activity, NewCharacterActivity::class.java)
-        startActivity(intent)
+        startActivityForResult(intent, 1)
     }
 
     //calls the new item sheet function
     fun newItemSheet(){
         Log.d("Pages", "ItemSheet")
         val intent = Intent(activity, NewItemActivity::class.java)
-        startActivity(intent)
+        startActivityForResult(intent, 2)
     }
 
     fun openCharacterSheet(){
@@ -90,6 +113,32 @@ class HomePageFragment : Fragment() {
     fun openItemSheet(){
         //populate data from room
 
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        Log.d("HomePageFragment", "JUST GOT BACK HOME :D $resultCode")
+
+        val edit = data?.getBooleanExtra("edit", false)
+        val name = data?.getStringExtra("name")
+        val race = data?.getStringExtra("race")
+        val charClass = data?.getStringExtra("class")
+        val level = data?.getIntExtra("level", 1)
+
+        if (resultCode == -1)
+            return;
+
+        if (edit == true){
+            // Change data to existing character if called from openCharacterSheet()
+        }
+        else{
+            val newChar = level?.let { Character(name, race, charClass, it) }
+            if (newChar != null) {
+                characterList.add(newChar)
+                Log.d("HomePageFragment", "NEW CHARACTER ADDED, LIST SIZE IS NOW: " + characterList.size)
+                Log.d("HomePageFragment", newChar.toString())
+            }
+        }
     }
 
     companion object {
